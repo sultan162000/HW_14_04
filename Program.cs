@@ -77,7 +77,31 @@ namespace HW_14_04
                     deleteUser(d);
                     break;
 
-                    
+                    case 5:
+                    System.Console.Write("Выберите опцию\n1.Изменит имю\n2.Изменит фамилию\n::");
+                    int c = int.Parse(Console.ReadLine());
+                    switch (c)
+                    {
+                        case 1:
+                        System.Console.Write("Введите Id для изменение имени: ");
+                        int id1 = int.Parse(Console.ReadLine());
+                        System.Console.Write("Новое имя: ");
+                        string newName = Console.ReadLine();
+                        updateUsrName(id1,newName);
+                        break;
+
+                        case 2:
+                        System.Console.Write("Введите Id для изменение фамилии: ");
+                        int id2 = int.Parse(Console.ReadLine());
+                        System.Console.Write("Новое фамилия: ");
+                        string newLastName = Console.ReadLine();
+                        updateUsrLastName(id2,newLastName);
+                        break;
+
+                        default:
+                        break;
+                    }
+                    break;
 
                     case 6:
                     t= false;
@@ -192,6 +216,28 @@ namespace HW_14_04
  
                 }
             }
+        }
+
+        public void updateUsrName(int id,string name){
+            string sql = $"Update Person Set FirstName = '{name}' Where Id = '{id}'";
+            SqlConnection mssql = new SqlConnection(connectString);
+            mssql.Open();
+            using (SqlCommand cmd = new SqlCommand(sql,mssql))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            mssql.Close();
+        }
+
+        public void updateUsrLastName(int id,string lastname){
+            string sql = $"Update Person Set LastName = '{lastname}' Where Id = '{id}'";
+            SqlConnection mssql = new SqlConnection(connectString);
+            mssql.Open();
+            using (SqlCommand cmd = new SqlCommand(sql,mssql))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            mssql.Close();
         }
 
 
