@@ -93,7 +93,43 @@ namespace HW_14_04
 
         
 
+        public void AddUser(string conn, string firstName, string lastName,string middleName, string birthDay){
+            SqlConnection mssql = new SqlConnection(conn);
+            mssql.Open();
+            string commandString = $"insert into Person(FirstName, LastName, MiddleName, BirthDay) values('{firstName}','{lastName}','{middleName}','{birthDay}')";
+            using (SqlCommand cmd = new SqlCommand(commandString,mssql))
+            {
+                SqlParameter par = new SqlParameter();
+                par.ParameterName = "@FirstName";
+                par.Value = firstName;
+                cmd.Parameters.Add(par);
 
+                par = new SqlParameter();
+                par.ParameterName = "@LastName";
+                par.Value = lastName;
+                cmd.Parameters.Add(par);
+
+                par = new SqlParameter();
+                par.ParameterName = "@MiddleName";
+                par.Value = middleName;
+                cmd.Parameters.Add(par);
+
+                par = new SqlParameter();
+                par.ParameterName = "@BirthDay";
+                par.Value = Convert.ToDateTime(birthDay);
+                par.SqlDbType = SqlDbType.DateTime;
+                cmd.Parameters.Add(par);
+
+                cmd.ExecuteNonQuery();
+                SqlCommand cmds = new SqlCommand($"Select Id from Person where FirstName='{firstName}'",mssql);
+                SqlDataReader read = cmds.ExecuteReader();
+                while(read.Read()){
+                    idUser = (int)read.GetValue("Id"); 
+                }
+            }
+
+            mssql.Close();
+        }
 
         
 
