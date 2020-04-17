@@ -78,29 +78,17 @@ namespace HW_14_04
                     break;
 
                     case 5:
-                    System.Console.Write("Выберите опцию\n1.Изменит имю\n2.Изменит фамилию\n::");
-                    int c = int.Parse(Console.ReadLine());
-                    switch (c)
-                    {
-                        case 1:
-                        System.Console.Write("Введите Id для изменение имени: ");
-                        int id1 = int.Parse(Console.ReadLine());
-                        System.Console.Write("Новое имя: ");
-                        string newName = Console.ReadLine();
-                        updateUsrName(id1,newName);
-                        break;
-
-                        case 2:
-                        System.Console.Write("Введите Id для изменение фамилии: ");
-                        int id2 = int.Parse(Console.ReadLine());
-                        System.Console.Write("Новое фамилия: ");
-                        string newLastName = Console.ReadLine();
-                        updateUsrLastName(id2,newLastName);
-                        break;
-
-                        default:
-                        break;
-                    }
+                    System.Console.Write("Введите id для изменение: ");
+                    int id3 = int.Parse(Console.ReadLine());
+                    System.Console.Write("1.Новое имя: ");
+                    string newName = Console.ReadLine();
+                    System.Console.Write("1.Новое фамилия: ");
+                    string newLastName = Console.ReadLine();
+                    System.Console.Write("1.Новое отчества: ");
+                    string newMiddleName = Console.ReadLine();
+                    System.Console.Write("1.День рождение: ");
+                    string newBirthDay = Console.ReadLine();
+                    updateUsr(id3,newName,newLastName,newMiddleName,newBirthDay);
                     break;
 
                     case 6:
@@ -218,8 +206,8 @@ namespace HW_14_04
             }
         }
 
-        public void updateUsrName(int id,string name){
-            string sql = $"Update Person Set FirstName = '{name}' Where Id = '{id}'";
+        public void updateUsr(int id,string name,string lastName,string middleName,string birthDay){
+            string sql = $"Update Person Set FirstName = '{name}', LastName = '{lastName}', MiddleName = '{middleName}', BirthDay = '{birthDay}'  Where Id = '{id}'";
             SqlConnection mssql = new SqlConnection(connectString);
             mssql.Open();
             using (SqlCommand cmd = new SqlCommand(sql,mssql))
@@ -229,16 +217,7 @@ namespace HW_14_04
             mssql.Close();
         }
 
-        public void updateUsrLastName(int id,string lastname){
-            string sql = $"Update Person Set LastName = '{lastname}' Where Id = '{id}'";
-            SqlConnection mssql = new SqlConnection(connectString);
-            mssql.Open();
-            using (SqlCommand cmd = new SqlCommand(sql,mssql))
-            {
-                cmd.ExecuteNonQuery();
-            }
-            mssql.Close();
-        }
+        
 
 
 
