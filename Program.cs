@@ -17,10 +17,7 @@ namespace HW_14_04
     class Person{
         public const string connectString = "Data Source=localhost;Initial Catalog=Liblary;Integrated Security=True";
 
-        public string firstName{get;set;}
-        public string lastName{get;set;}
-        public string middleName{get;set;}
-        public string birthDay{get;set;}
+        
         public int idUser{get;set;}
         
 
@@ -42,13 +39,13 @@ namespace HW_14_04
                 {
                     case 1:
                     System.Console.Write("Имя: ");
-                    firstName = Console.ReadLine();
+                    string firstName = Console.ReadLine();
                     System.Console.Write("Фамилия: ");
-                    lastName = Console.ReadLine();
+                    string lastName = Console.ReadLine();
                     System.Console.Write("Отчества: ");
-                    middleName = Console.ReadLine();
+                    string middleName = Console.ReadLine();
                     System.Console.Write("День Рождение: ");
-                    birthDay = Console.ReadLine();
+                    string birthDay = Console.ReadLine();
                     if(!string.IsNullOrEmpty(firstName)&&!string.IsNullOrEmpty(lastName)&&!string.IsNullOrEmpty(birthDay)){
                         AddUser(connectString,firstName,lastName,middleName,birthDay);
                         System.Console.WriteLine("Uspeshno");
